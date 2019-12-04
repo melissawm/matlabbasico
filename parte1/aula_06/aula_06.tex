@@ -1,0 +1,153 @@
+\documentclass[hyperref={pdfpagelabels=false}]{beamer}
+\usetheme[block=fill]{metropolis}
+
+\usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc} % To use characters such as é without typing é
+\usepackage{ctable}
+\usepackage{listings}
+\lstset{%
+  language=Matlab,
+  showstringspaces=false,
+  basicstyle=\linespread{0.9}\ttfamily,
+  keywordstyle=\textbf,
+  commentstyle=\color{gray},
+  stringstyle=\color{orange},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  numbersep=10pt,
+  columns=fullflexible,
+  tabsize=3,
+  frame=single,
+  frameround=tttt}
+\let\Tiny=\tiny % eliminates compilation errors
+\usepackage{fontspec}
+
+\title{Laboratório de Matemática Computacional I}
+\subtitle{Aula 6}
+\author[M. Weber Mendonça]{Melissa Weber Mendonça\\
+Universidade Federal de Santa Catarina}
+\date{2011}
+
+\begin{document}
+\setmonofont{Inconsolata}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Aquecimento}
+  Dados $N$,$A$,$B$ e $C$, encontre quantas soluções inteiras existem para a equação 
+  $$a + b + c <= N$$
+  de forma que $0 \leq a \leq A$, $0 \leq b \leq B$ e $0 \leq c \leq C$.
+  
+  \begin{center} \href{listings/solucoeseq.m}{\underline{\texttt{solucoeseq.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Exemplos}
+  Escrever um programa que faz uma contagem regressiva de 10 até 1, e no final diz ``Já!''
+  \begin{center} {\texttt{pause(segundos)}} \end{center}
+  Somente para o octave: digitar no console
+  \begin{center}{\texttt{more off}} \end{center}
+  
+  \begin{center} \href{listings/contregressiva.m}{\underline{\texttt{contregressiva.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Funções - No Matlab}
+  \begin{itemize}
+  \item[] \texttt{function \alert{saída} = \alert{nome}(\alert{entrada})}
+  \item[]  \begin{itemize}
+  \item[] \texttt{\alert{comandos}}
+  \end{itemize}
+  \end{itemize}
+  
+  As funções devem estar num arquivo próprio, cujo nome deve ser igual ao nome da função.
+\end{frame}
+
+\begin{frame}{Exemplos}
+   Escrever um programa que toma dois números e calcula sua soma, sua diferença, seu produto e a divisão de um pelo outro (as operações aritméticas deverão ser feitas dentro de funções.)
+
+   \begin{itemize}
+   \item Arquivo principal: \href{listings/operacoes.m}{\underline{\texttt{operacoes.m}}}
+   \item Funções:
+     \begin{itemize}
+     \item \href{listings/soma.m}{\underline{\texttt{soma.m}}}
+     \item \href{listings/diferenca.m}{\underline{\texttt{diferenca.m}}}
+	   \item \href{listings/produto.m}{\underline{\texttt{produto.m}}}
+	   \item \href{listings/divisao.m}{\underline{\texttt{divisao.m}}}
+     \end{itemize}
+   \end{itemize}
+\end{frame}
+
+\begin{frame}{Exemplos}
+	Escrever uma função que recebe dois números e calcula sua soma, sua diferença, seu produto e a divisão de um pelo outro, e retorna os quatro valores como argumentos de saída da função.
+  
+	\begin{center} \href{listings/calculaoperacoes.m}{\underline{\texttt{calculaoperacoes.m}}} \end{center}
+	\begin{center} \href{listings/calculaoperacoes2.m}{\underline{\texttt{calculaoperacoes2.m}}} \end{center}
+
+\end{frame}
+
+\begin{frame}{Exemplos}
+  Escrever uma função que converte valores de dólar para real, usando uma taxa de câmbio fixada no programa.
+	\begin{center} \href{listings/cambio.m}{\underline{\texttt{cambio.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Exemplos}
+  Escrever uma função que recebe 2 números $a$ e $b$ e retorna a divisão de $a$ por $b$ e a divisão de $b$ por $a$, caso os dois sejam não-nulos. Se $a$ ou $b$ forem nulos, a função retorna 0.
+   
+   \begin{center} \href{listings/divisaopossivel.m}{\underline{\texttt{divisaopossivel.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Exemplos}
+  Escrever uma função que recebe 2 números $a$ e $b$ e retorna 'OK!', caso os dois sejam não-nulos. Se $a$ ou $b$ forem nulos, a função retorna 'Nao posso dividir.'
+  \begin{center} \href{listings/divisaopossivel2.m}{\underline{\texttt{divisaopossivel2.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Como lidar com texto}
+  
+	\only<1>{\begin{center} {\texttt{texto = 'A resposta eh
+          sim.'}}\end{center}}
+  \only<2>{\begin{itemize}   
+		\item[] {\texttt{resposta = 'sim';}}\\
+		\item[] {\texttt{texto = ['A resposta eh ' resposta
+          '.'];}}\\
+		\item[] {\texttt{disp(texto)}}
+  \end{itemize}}
+  \only<3>{\begin{itemize}
+		\item[] {\texttt{resposta = 'sim';}}\\
+		\item[] {\texttt{disp(['A resposta eh ' resposta '.'])}}
+	\end{itemize}}
+\end{frame}
+
+\begin{frame}{Exemplo}
+  Se a resposta for ``sim'', escrever na tela ``Afirmativo!''. Senão, escrever na tela ``Nunca será!'' (cuidado com o acento...)
+\end{frame}
+
+\begin{frame}{Comparando texto}
+  Compare o texto $\rightarrow$ \emph{\alert{str}ing \alert{c}o\alert{mp}are}
+  \begin{center} {\texttt{strcmp(texto1,texto2)}} \end{center}
+  No nosso caso:
+  \begin{center} {\texttt{strcmp(resposta,'sim')}} \end{center}
+\end{frame}
+
+\begin{frame}{Exemplo}
+  Se a resposta for ``sim'', escrever na tela ``Afirmativo!''. Senão, escrever na tela ``Nunca será!'' (cuidado com o acento...)
+	\lstinputlisting[title=\texttt{qualaresposta.m}]{listings/qualaresposta.m}
+\end{frame}
+
+\begin{frame}{Cuidados}
+  \begin{itemize}
+  \item Um texto deve sempre ser informado entre aspas simples.
+  \item {\texttt{'sim'}} $\ne$ {\texttt{'  sim'}}
+  \item {\texttt{'sim'}} $\ne$ {\texttt{'Sim'}} (se não for importante,
+		usar a função {\texttt{strcmp\alert{i}(texto1,texto2)}}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Exemplos}
+  Escrever um programa que recebe uma temperatura, com um tipo determinado (Celsius ou Fahrenheit) e converte para a outra unidade.
+
+	\begin{center} \href{listings/converter.m}{\underline{\texttt{converter.m}}} \end{center}
+\end{frame}
+
+\end{document}
