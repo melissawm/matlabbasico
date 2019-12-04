@@ -1,0 +1,4 @@
+function [f] = temperatura(x)
+   
+   f = 9*x/5 + 32;
+   c = (x - 32) * 5/9;

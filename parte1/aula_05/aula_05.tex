@@ -1,0 +1,203 @@
+\documentclass[hyperref={pdfpagelabels=false}]{beamer}
+\usetheme[block=fill]{metropolis}
+
+\usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc} % To use characters such as é without typing é
+\usepackage{ctable}
+\usepackage{listings}
+\lstset{%
+  language=Matlab,
+  showstringspaces=false,
+  basicstyle=\linespread{0.9}\ttfamily,
+  keywordstyle=\textbf,
+  commentstyle=\color{gray},
+  stringstyle=\color{orange},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  numbersep=10pt,
+  columns=fullflexible,
+  tabsize=3,
+  frame=single,
+  frameround=tttt}
+\let\Tiny=\tiny % eliminates compilation errors
+\usepackage{fontspec}
+
+\title{Laboratório de Matemática Computacional I}
+\subtitle{Aula 5}
+\author[M. Weber Mendonça]{Melissa Weber Mendonça\\
+Universidade Federal de Santa Catarina}
+\date{2011}
+
+\begin{document}
+\setmonofont{Inconsolata}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Comentários}
+  No MATLAB, os comentários são sinalizados por \%
+  \only<2>{\lstinputlisting[title=\texttt{leitor2.m}]{listings/leitor2.m}}
+\end{frame}
+
+\begin{frame}{For}
+  Escreva um programa que imprima todos os números de 1 a $n$, onde $n$ é dado pelo usuário.
+  \begin{itemize}
+  \item[] {\texttt{n = input('Entre com o numero n: ')}}
+  \item[] {\texttt{numero = 1;}}
+  \item[] {\texttt{\alert{Enquanto} numero $\leq n$}}
+    \begin{itemize}
+    \item[] {\texttt{numero}}
+    \item[] {\texttt{numero = numero+1;}}
+    \end{itemize}
+  \item[] {\texttt{\alert{Fim Enquanto}}}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{For}
+  Escreva um programa que imprima todos os números de 1 a $n$, onde $n$ é dado pelo usuário.
+  \begin{itemize}
+  \item[] {\texttt{n = input('Entre com o numero n: ')}}
+  \item[] {\texttt{\alert{Para} numero = 1 \alert{até} numero = n}}
+    \begin{itemize}
+    \item[] {\texttt{numero}}
+    \end{itemize}
+  \item[] {\texttt{\alert{Fim Para}}}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{For}
+	Escreva um programa que imprima todos os números de 1 a $n$, onde $n$ é dado pelo usuário.
+	\lstinputlisting[title=\texttt{for1.m}]{listings/for1.m}
+\end{frame}
+
+\begin{frame}{Exemplos}
+  Escrever um programa que calcule o fatorial de um número, usando {\texttt{for}}.
+  \vfill
+  \begin{center} \href{listings/fatfor.m}{\underline{\texttt{fatfor.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Exemplos}
+  Somar todos os números naturais de 0 até 1000 que sejam múltiplos de 3 ou 5.
+  \vfill
+  \begin{center} \href{listings/tresoucinco.m}{\underline{\texttt{tresoucinco.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Exemplos}
+  Escrever um programa que imprime os números naturais entre 0 e $n$, trocando os múltiplos de 5 por \alert{plim!}
+  \vfill
+  \begin{center} \href{listings/plim.m}{\underline{\texttt{plim.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Exemplos}
+  Escrever um programa que multiplica dois números (dados pelo usuário) através de \emph{somas}.
+   
+  Exemplo: $3\times 5 = 5+5+5$.
+  \vfill
+  \begin{center} \href{listings/multiplicacao.m}{\underline{\texttt{multiplicacao.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Exemplos}
+	A sequência de Fibonacci é dada pela regra seguinte: dados $F_0 = 0$ e $F_1 = 1$, o $n$-ésimo termo é calculado pela fórmula
+	$$F_n = F_{n-1} + F_{n-2}.$$
+	Escrever um programa que calcula o $n$-ésimo termo da sequência de Fibonacci.
+	\vfill
+  \begin{center} \href{listings/fibonacci.m}{\underline{\texttt{fibonacci.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Exemplos}
+	Escrever um programa que aproxima $\pi$, usando a fórmula
+	$$\pi \approx 4\sum_{k=0}^m \frac{(-1)^k}{2k+1},$$
+	sendo que $m$ é informado pelo usuário.
+	\vfill
+  \begin{center} \href{listings/piaproximado.m}{\underline{\texttt{piaproximado.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Funções}
+  Na matemática, 
+	$$f(x) = y.$$
+	
+	Entrada: $x$
+	
+	Saída: $y$
+	
+	Ação: $f$.
+	
+	Exemplo: $f(x) = x^2$.
+\end{frame}
+
+\begin{frame}{Funções pré-definidas}
+  \begin{itemize}
+    \item \texttt{n = \textbf{input}('Entre com um numero:')}
+    \item \texttt{nfat = \textbf{factorial}(n)}
+    \item \texttt{texto = \textbf{num2str}(25)}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Funções - No Matlab}
+
+  \begin{itemize}
+  \item[] \texttt{function \alert{saída} = \alert{nome}(\alert{entrada})}
+	\item[] \begin{itemize}
+	\item[] \texttt{\alert{comandos}}
+	\end{itemize}
+	\end{itemize}
+	As funções devem estar num arquivo próprio, cujo nome deve ser igual ao nome da função.
+\end{frame}
+
+\begin{frame}{Qual a diferença entre um \emph{script} e uma \emph{função}?}
+  Um \emph{script} é um arquivo que contém uma sequência de comandos, mas não exige entrada ou saída.
+  
+  Uma função deve, obrigatoriamente, ter pelo menos uma entrada e uma saída.
+\end{frame}
+
+\begin{frame}{Exemplo: script}
+  \lstinputlisting[title=\texttt{testemelissa.m}]{listings/testemelissa.m}
+\end{frame}
+
+\begin{frame}{Exemplo: função}
+  \lstinputlisting[title=\texttt{xquadrado.m}]{listings/xquadrado.m}
+  \vfill
+	Note que não usamos {\texttt{clear}} dentro da função, pois dentro da função as variáveis são \alert{locais}.
+\end{frame}
+
+\begin{frame}{Argumentos de entrada e saída}
+  Se tivermos mais de um argumento de entrada, basta separá-los por vírgulas:
+  
+  \texttt{s = soma(x,y)}
+  
+  Se tivermos mais de um argumento de saída, precisamos escrevê-los entre colchetes:
+  
+  \texttt{[a,b] = somaesubtracao(x,y)}
+\end{frame}
+
+\begin{frame}{Exemplos}
+  \begin{itemize}
+  \item[] \texttt{function s = adicionar(x,y)}
+  \item[] \begin{itemize}
+  \item[] \texttt{s = x+y}
+  \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Exemplos}
+   Escrever uma função que, dada a base e a altura de um triângulo, calcula sua área.
+   
+	 \only<2>{ \vfill
+     \begin{itemize}
+     \item[] \texttt{function area = areadotriangulo(b,h)}
+     \item[] \begin{itemize}
+     \item[] \texttt{area = b*h/2;}
+     \end{itemize}
+     \end{itemize}
+   }
+\end{frame}
+
+\begin{frame}{Exemplos}
+	Escrever uma função que recebe uma temperatura em Celsius e converte para Fahrenheit, sendo que a fórmula de conversão é
+	$$T_f = \frac{9 T_c}{5}+32$$
+	\only<2>{\lstinputlisting[title=\texttt{temperatura.m}]{listings/temperatura.m}}
+\end{frame}
+
+\end{document}
