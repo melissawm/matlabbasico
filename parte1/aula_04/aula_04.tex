@@ -1,0 +1,148 @@
+\documentclass[hyperref={pdfpagelabels=false}]{beamer}
+\usetheme[block=fill]{metropolis}
+
+\usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc} % To use characters such as é without typing é
+\usepackage{ctable}
+\usepackage{listings}
+\lstset{%
+  language=Matlab,
+  showstringspaces=false,
+  basicstyle=\linespread{0.9}\ttfamily,
+  keywordstyle=\textbf,
+  commentstyle=\color{red},
+  stringstyle=\color{orange},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  numbersep=10pt,
+  columns=fullflexible,
+  tabsize=3,
+  frame=single,
+  frameround=tttt}
+\let\Tiny=\tiny % eliminates compilation errors
+\usepackage{fontspec}
+
+\title{Laboratório de Matemática Computacional I}
+\subtitle{Aula 4}
+\author[M. Weber Mendonça]{Melissa Weber Mendonça\\
+Universidade Federal de Santa Catarina}
+\date{2011}
+
+\begin{document}
+\setmonofont{Inconsolata}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Tipos de Variável}
+
+	Até aqui, estamos lidando com dois tipos de variável: números e \emph{texto}.
+  
+	\begin{alertblock}{}
+		\begin{center}
+			O valor de uma variável do tipo \emph{texto} sempre será \\escrito
+			entre	aspas!
+		\end{center}
+	\end{alertblock}
+
+  \only<2->{
+    \begin{itemize}
+    \item {\texttt{str2num}}: transforma um número em texto
+    \item {\texttt{num2str}}: transforma texto em número
+    \end{itemize}
+    \begin{itemize}
+    \item[] {\texttt{num2str(10) = '10'}} $\leftarrow$ serve para imprimir um\\
+		  \hspace{4.15cm} número no meio de um texto.
+    \item[] {\texttt{str2num('25') = 25}} 
+    \item[] {\texttt{num2str('texto') = ?}}
+    \end{itemize}
+  }
+\end{frame}
+
+\begin{frame}{Exemplo ({\texttt{num2str}})}
+  \lstinputlisting[title=\texttt{dispteste.m}]{listings/dispteste.m}
+\end{frame}
+
+\begin{frame}{Exemplo ({\ttfamily{num2str}})}
+	\begin{center} \href{listings/dispteste2.m}{\underline{\texttt{dispteste2.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Voltando ao exemplo da outra aula...}
+
+  Queremos que o usuário tente adivinhar um número entre 0 e 10.
+  
+  MAS: gostaríamos que o programa soubesse que, \emph{enquanto a pessoa não acertar o número, ele deve continuar perguntando}.
+\end{frame}
+
+\begin{frame}{Voltando ao exemplo do número...}
+  \begin{itemize}
+  \item[] {\texttt{numero = input('Entre com o numero: ')}}
+  \item[] {\texttt{\alert{Enquanto} numero $\sim$= 5}}
+    \begin{itemize}
+    \item[] {\texttt{disp('Errou... Tente novamente!')}}
+    \item[] {\texttt{numero = input('Entre com o numero: ')}}
+    \end{itemize}
+  \item[] {\texttt{\alert{Fim Enquanto}}}
+  \item[] {\texttt{disp('Acertou!')}}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Voltando ao exemplo do número...}
+  \lstinputlisting[title=\texttt{guesswhile.m}]{listings/guesswhile.m}
+\end{frame}
+
+\begin{frame}{While-End}
+  A estrutura {\texttt{while}} é uma estrutura de \alert{repetição} que serve para repetir um bloco de código até que certa condição seja satisfeita.
+
+   No caso anterior, repetimos as linhas 3 e 4 do código até que a variável \texttt{numero} contenha o valor 5.
+
+   \begin{itemize}
+   \item[] {\texttt{while (condição)}}
+     \begin{itemize}
+     \item[] {\texttt{faça ...}}
+     \end{itemize}
+   \item[] {\texttt{end}}
+   \end{itemize}
+\end{frame}
+
+\begin{frame}{Exemplo}
+  Escrever na tela os números de 1 a 10.
+	\lstinputlisting[title=\texttt{while2.m}]{listings/while2.m}
+\end{frame}
+
+\begin{frame}{Exemplo}
+  Escrever um programa que imprime 'Repetindo!' na tela até que o usuário digite o número 0.
+	\vfill
+	\begin{center} \href{listings/repetindo.m}{\underline{\texttt{repetindo.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Exemplo}
+  Escrever um programa que escreve na tela todos os números pares entre 1 e 100.
+	\vfill
+	\begin{center} \href{listings/pares.m}{\underline{\texttt{pares.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Exemplo}
+  Escrever um programa que calcula a soma dos $n$ primeiros números naturais ($n$ é fornecido pelo usuário).
+	\vfill
+	\begin{center} \href{listings/somannaturais.m}{\underline{\texttt{somannaturais.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Exemplos}
+  Escrever um programa que calcule o fatorial de um número.
+  \only<2>{\lstinputlisting[title=\texttt{fat.m}]{listings/fat.m}}
+\end{frame}
+
+\begin{frame}{Exemplo}
+  Escrever um programa que decide se um número é primo.
+  \vfill 
+  \begin{center} \href{listings/primo.m}{\underline{\texttt{primo.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Exemplo}
+  \only<1>{Escrever um programa que calcula a média de idade de um grupo de pessoas. O número de pessoas é determinado pelo usuário, que deve entrar as idades uma por uma. Quando o usuário digitar o número 0, a lista estará completa.}
+  \only<2>{\lstinputlisting[title=\texttt{media.m}]{listings/media.m}}
+\end{frame}
+\end{document}
