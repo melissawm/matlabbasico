@@ -1,0 +1,312 @@
+\documentclass[hyperref={pdfpagelabels=false}]{beamer}
+\mode<presentation>
+{
+  \usetheme{Frankfurt}
+  \setbeamercovered{transparent}
+}
+\usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc} % To use characters such as é without typing é
+\usepackage{ctable}
+\usepackage{listings}
+\lstset{language=Matlab,showstringspaces=false,basicstyle=\ttfamily,
+    keywordstyle=\color{blue},
+    commentstyle=\color{red},
+    stringstyle=\color{magenta},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=10pt,
+    tabsize=4, frame=single}
+\let\Tiny=\tiny % eliminates compilation errors
+
+% Basic definitions
+
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+
+\title{Laboratório de Matemática Computacional I} \author[M. Weber Mendonça]
+{\hspace{-0.3cm}Melissa Weber Mendonça\inst{1}}
+\institute[UFSC]{\inst{1} Universidade Federal de Santa Catarina} 
+\date{2011}
+
+\logo{\includegraphics[height=1.5cm]{../../brasao_UFSC.png}}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Problema 1}
+  Escrever um programa que pede para o usuário tentar adivinhar um número entre 0 e 10.
+\end{frame}
+
+\begin{frame}{If - Else - End: Se - Senão - Fim}
+  O If (Se) representa uma sentença lógica condicional: 
+  \vskip1cm
+  \begin{center}
+    \begin{minipage}{0.7\textwidth}
+      \begin{itemize}
+      \item[] Se (sentença lógica for verdadeira) então
+	      \begin{itemize}
+	      \item[] faça (1)
+	      \end{itemize}
+      \item[] Senão
+	      \begin{itemize}
+	      \item[] faça (2) 
+	      \end{itemize}
+      \item[] Fim Se 
+      \end{itemize}
+    \end{minipage}
+    \vfill
+    \begin{minipage}{0.8\textwidth}
+      \begin{alertblock}{}
+        Em Matlab, uma sentença lógica pode ter dois valores:\\
+        \begin{center} 0 (Falso) ou 1 (Verdadeiro)\end{center}
+      \end{alertblock}
+    \end{minipage}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Problema 1}
+  Para comparar dois números $a$ e $b$, usamos os seguintes sinais em Matlab:
+  \begin{columns}
+    \column{5cm} 
+    \begin{itemize}
+    \item $a$ é igual a $b$? 
+    \item $a$ é maior que $b$?
+    \item $a$ é menor que $b$?
+    \item $a$ é maior ou igual a $b$?
+    \item $a$ é menor ou igual a $b$?
+    \item $a$ é diferente de $b$?
+    \end{itemize}
+    \column{5cm}
+    \begin{itemize}
+    \item[] {\texttt{a == b}}
+    \item[] {\texttt{a > b}}
+    \item[] {\texttt{a < b}}
+    \item[] {\texttt{a >= b}}
+    \item[] {\texttt{a <= b}}
+    \item[] {\texttt{a $\sim$= b}}
+    \end{itemize}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Exemplos}
+  Testar no console do Matlab:
+  \begin{columns}
+    \column{5cm}
+    \begin{itemize}	
+    \item 0 é igual a 1?
+    \item 2 é maior que 1?
+    \item 1 é igual a 1?
+    \item 1 é maior ou igual a 1?
+    \item $\sin{(\pi)}$ é igual a 0?
+    \end{itemize}
+    \column{5cm}
+    \setbeamercovered{invisible}
+    \begin{itemize}
+    \item<2-> \texttt{0 == 1}
+    \item<3-> \texttt{2 > 1}
+    \item<4-> \texttt{1 == 1}
+    \item<5-> \texttt{1 >= 1}
+    \item<6-> \texttt{sin(pi) == 0}
+    \end{itemize}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Problema 1 - Resposta}
+   Escrever um programa que pede para o usuário tentar adivinhar um número
+ entre 0 e 10.
+  \begin{center}
+    \begin{minipage}{0.5\textwidth}
+      \begin{alertblock}{}
+	\begin{center}
+	  Aqui, não precisamos usar funções!
+	\end{center}
+      \end{alertblock}
+    \end{minipage}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Problema 1 - Resposta}
+   Escrever um programa que pede para o usuário tentar adivinhar um número
+ entre 0 e 10.
+   \lstinputlisting[title=\texttt{guess.m}]{listings/guess.m}
+\end{frame}
+
+\begin{frame}{Problema 1 - Resposta}
+   \lstinputlisting[title=\texttt{guess2.m}]{listings/guess2.m}
+\end{frame}
+
+\begin{frame}{Problema 1 - Resposta alternativa}
+  \lstinputlisting[title=\texttt{guess3.m}]{listings/guess3.m}
+\end{frame}
+
+\begin{frame}{Outros Problemas}
+  \setbeamercovered{invisible}
+  \only<1>{%
+    Escrever um programa que receba um número real qualquer e exiba uma mensagem caso ele seja negativo.
+    \begin{center}
+      Resposta: \href{listings/negativo.m}{\underline{\texttt{negativo.m}}}
+    \end{center}
+  }
+  \only<2>{%
+    Escrever um programa que divide um número $a$ por um número $b$, testando se o denominador é zero.
+    \begin{center}
+      Resposta: \href{listings/divisao.m}{\underline{\texttt{divisao.m}}}
+    \end{center}
+  }
+  \only<3>{%
+    Escrever um programa que determina se um número dado é par ou ímpar.
+    \begin{block}{}
+      \begin{center}
+        Use a função {\texttt{rem(número,divisor)}}
+      \end{center}
+    \end{block}
+    \begin{center}
+      Resposta: \href{listings/parouimpar.m}{\underline{\texttt{parouimpar.m}}}
+    \end{center}
+  }
+\end{frame}
+
+\begin{frame}{ElseIf}
+   Nos casos em que precisamos de mais de 2 alternativas, podemos usar um atalho: {\texttt{elseif}}
+   \begin{center}
+     \begin{minipage}{0.7\textwidth}
+       \begin{itemize}
+       \item[] Se (sentença lógica) então
+	       \begin{itemize}
+	       \item[] faça (1)
+	       \end{itemize}
+       \item[] SenãoSe
+	       \begin{itemize}
+	       \item[] faça (2) 
+	       \end{itemize}
+		   \item[] Senão
+		     \begin{itemize}
+		     \item[] faça (3)
+		     \end{itemize}
+       \item[] Fim Se 
+       \end{itemize}
+     \end{minipage}
+   \end{center}
+\end{frame}
+
+\begin{frame}{ElseIf: exemplo 1}
+  Escrever um programa que, dadas as notas de 3 provas obtidas por um aluno no semestre, retorne sua média (calculada pela média aritmética das 3 provas) e diga se o aluno foi aprovado, reprovado ou se está em recuperação.
+  \begin{center}
+    \begin{minipage}{0.8\textwidth}
+	    \only<1>{\lstinputlisting[title={\texttt{elif2-if.m}}]{listings/elif2-if.m}}
+      \only<2>{\lstinputlisting[title={\texttt{elif2.m}}]{listings/elif2.m}}
+    \end{minipage}
+  \end{center}
+\end{frame}
+
+\begin{frame}{ElseIf: exemplo 2}
+  Escrever um programa que, dada a idade de uma pessoa, caracteriza essa pessoa como criança, adolescente, adulto ou idoso.
+  \begin{center}
+    \begin{minipage}{0.85\textwidth}
+      \lstinputlisting[basicstyle=\footnotesize, title=\texttt{elif.m}]{listings/elif.m}
+    \end{minipage}
+  \end{center}
+\end{frame}
+
+\begin{frame}{e - \texttt{\&\&}}
+  Muitas vezes, precisamos agrupar valores lógicos:
+  
+  \begin{block}{}
+		Se uma pessoa for homem \alert{e} tiver mais de 18 anos, deve se inscrever no serviço militar.
+	\end{block}
+	\only<1>{
+	  \begin{itemize}
+	  \item[] Se gênero {\texttt{==}} homem então
+	    \begin{itemize}
+			\item[] Se idade {\texttt{>=}} 18 então
+			  \begin{itemize}
+				\item[] Inscreva-se no serviço militar.
+			  \end{itemize}
+			\item[] Senão
+			  \begin{itemize}
+				\item[] Você está liberado!
+			  \end{itemize}
+			\item[] Fim Se
+	    \end{itemize}
+	  \item[] Senão
+	    \begin{itemize}
+			\item[] Você está liberade!
+	    \end{itemize}
+	  \item[] Fim Se
+	  \end{itemize}
+  }
+	\only<2>{
+	  \begin{itemize}
+	  \item[] Se gênero {\texttt{==}} homem \alert{e} idade {\texttt{>=}} 18 então
+			\begin{itemize}
+			\item[] Inscreva-se no serviço militar.
+			\end{itemize}
+		\item[] Senão
+			\begin{itemize}
+			\item[] Você está liberado!
+			\end{itemize}
+		\item[] Fim Se
+	  \end{itemize}
+  }
+	\only<3>{
+	  \begin{itemize}
+	  \item[] Se \alert{(}gênero {\texttt{==}} homem\alert{)} \alert{e} \alert{(}idade {\texttt{>=}} 18\alert{)} então
+			\begin{itemize}
+			\item[] Inscreva-se no serviço militar.
+			\end{itemize}
+		\item[] Senão
+			\begin{itemize}
+			\item[] Você está liberado!
+			\end{itemize}
+		\item[] Fim Se
+	  \end{itemize}
+  }
+\end{frame}
+
+\begin{frame}{e - Tabela Verdade}
+  \setbeamercovered{invisible}
+  \begin{center}
+  \begin{tabular}{c c c c}
+     \texttt{a} & \texttt{b} & & \texttt{a \&\& b}\\\toprule
+     \only<1->{Falso} & \only<1->{Falso} & & \only<2->{Falso}\\\midrule
+     \only<3->{Verdadeiro} & \only<3->{Falso} & &\only<4->{Falso}\\\midrule
+     \only<5->{Falso} & \only<5->{Verdadeiro} & &\only<6->{Falso}\\\midrule
+     \only<7->{Verdadeiro} & \only<7->{Verdadeiro} & &\only<8->{Verdadeiro}\\\bottomrule
+  \end{tabular}
+  \end{center}
+\end{frame}
+
+\begin{frame}{e - Tabela Verdade (Matlab)}
+	\begin{center}
+  \begin{tabular}{c c c c}
+     \texttt{a} & \texttt{b} & & \texttt{a \&\& b}\\\toprule
+     0 & 0 & & 0\\\midrule
+     1 & 0 & &0\\\midrule
+     0 & 1 & &0\\\midrule
+     1 & 1 & &1\\\bottomrule
+  \end{tabular}
+  \end{center}
+\end{frame}
+
+\begin{frame}{e - \texttt{\&\&}}
+   No Matlab: representamos o \alert{e} por \alert{{\texttt{\&\&}}}:
+   \lstinputlisting[title=\texttt{exemploe.m}]{listings/exemploe.m}
+\end{frame}
+
+\begin{frame}
+   \frametitle{e - \texttt{\&\&}: Exemplos}
+   \only<1>{%
+     Escrever um programa que decida se um número está em um intervalo dado $[a,b]$.
+     \begin{center}
+       Resposta: \href{listings/intervalo.m}{\underline{\texttt{intervalo.m}}}
+     \end{center}
+   }
+   \only<2>{%
+     Escrever um programa que decida se um número é divisível por 6.
+   }
+\end{frame}
+\end{document}
