@@ -1,0 +1,129 @@
+\documentclass[hyperref={pdfpagelabels=false}]{beamer}
+\usetheme[block=fill]{metropolis}
+
+\usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc} % To use characters such as é without typing é
+\usepackage{ctable}
+\usepackage{listings}
+\lstset{%
+  language=Matlab,
+  showstringspaces=false,
+  basicstyle=\linespread{0.9}\ttfamily,
+  keywordstyle=\textbf,
+  commentstyle=\color{gray},
+  stringstyle=\color{orange},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  numbersep=10pt,
+  columns=fullflexible,
+  tabsize=3,
+  frame=single,
+  frameround=tttt}
+\let\Tiny=\tiny % eliminates compilation errors
+\usepackage{fontspec}
+
+\title{Laboratório de Matemática Computacional I}
+\subtitle{Aula 11}
+\author[M. Weber Mendonça]{Melissa Weber Mendonça\\
+Universidade Federal de Santa Catarina}
+\date{2011}
+
+\begin{document}
+\setmonofont{Inconsolata}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Aquecimento}
+	Escreva um programa que conta quantas vezes uma vogal aparece em um texto e armazena a quantidade em uma lista, onde o primeiro elemento é a quantidade de ``a'', o segundo elemento é a quantidade de ``e'', e assim por diante.
+
+	Exemplo: ``Este eh um texto.''
+	
+	Resposta: [0, 4, 0, 1, 1]
+	
+	\begin{center} \href{listings/contavogais.m}{\underline{\texttt{contavogais.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Append}
+  Em uma lista, podemos acrescentar elementos a qualquer momento:
+  \vfill
+  Exemplo:\\
+  
+  \hskip2cm {\texttt{lista = [1,3,4,5]}}\\
+  \hskip2cm {\texttt{lista = [lista 2]}}\\
+  \hskip2cm {\texttt{lista}}
+\end{frame}
+
+\begin{frame}{Exemplos}
+  Podemos também efetuar operações com listas: adição, subtração, multiplicação por escalar, divisão...
+
+	\begin{block}{}
+    \begin{center}
+      Testar operaçoes com listas e escalares!
+    \end{center}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Exemplos}
+	Escreva um programa que imprime na tela a tabuada de um número $n$.
+	
+	\begin{center} \href{listings/tabuada.m}{\underline{\texttt{tabuada.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Exercício}
+		Escrever um programa que recebe duas listas de números, listando as dezenas e as unidades de certos números, e retorna uma lista com os números completos.
+    \vfill
+    Exemplo:	
+ 	  \begin{tabular}{l r c l}
+ 		  Entrada:  & dezenas &=& [2,1,0,7,0,0,3]\\
+      & unidades &=& [3,2,4,6,1,8,4]\\
+      Saída:   & lista &=& [23,12,4,76,1,8,34]
+ 	  \end{tabular}
+
+	  \begin{center} \href{listings/juntanumeros.m}{\underline{\texttt{juntanumeros.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Exercício}
+  Escreva um programa que recebe os coeficientes de um polinômio (números positivos), e escreve o polinômio na forma padrão. 
+  \vfill
+	Exemplo: coeficientes = [1,2,3,4,5]
+	
+	polinômio: {\texttt{p(x) = 1 + 2x + 3x\^{}2 + 4x\^{}3 + 5x\^{}4}}
+	
+	\begin{center} \href{listings/polinomio.m}{\underline{\texttt{polinomio.m}}} \end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Orientação}
+   Quando fazemos um vetor, podemos escolher entre um vetor ``na horizontal''
+   e um vetor ``na vertical'':
+
+	\begin{center}
+		{\texttt{vetor = [1,2,3,4,5]}}\\
+		{\texttt{vetor = [1 2 3 4 5]}}\\
+		{\texttt{vetor = [1;2;3;4;5]}}
+	\end{center}
+ 
+	\begin{alertblock}{Cuidado!}
+		Para realizar operações entre vetores, estes devem ter o mesmo tamanho e a mesma orientação!
+	\end{alertblock}
+	\begin{center} {\texttt{size(vetor)}} \end{center}
+\end{frame}
+
+\begin{frame}{Exemplo}
+	Escreva um programa que toma um vetor em uma orientação e transforma-o em outra. (Se o vetor for vertical, transformar em horizontal; se for horizontal, transformá-lo em vertical.)
+	
+	\begin{center} \href{listings/mudarorientacao.m}{\underline{\texttt{mudarorientacao.m}}} \end{center}
+	\vfill
+	\only<2>{Para alternar entre uma e outra orientação, podemos usar	o operador {\texttt{'}}:
+		\begin{center} {\texttt{vetor'}} \end{center}}
+\end{frame}
+
+\begin{frame}{Produto Interno}
+  O produto (elemento a elemento) de dois vetores é realizado pelo operador {\texttt{*}}. Se quisermos calcular o produto interno de dois vetores, precisamos fazer
+  \begin{center} {\texttt{vetor1*vetor2'}} \end{center}
+  ou
+  \begin{center} {\texttt{vetor1'*vetor2}} \end{center}
+\end{frame}
+\end{document}
