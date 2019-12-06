@@ -1,0 +1,114 @@
+\documentclass[hyperref={pdfpagelabels=false}]{beamer}
+\usetheme[block=fill]{metropolis}
+
+\usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc} % To use characters such as é without typing é
+\usepackage{ctable}
+\usepackage{listings}
+\lstset{%
+  language=Matlab,
+  showstringspaces=false,
+  basicstyle=\linespread{0.9}\ttfamily,
+  keywordstyle=\textbf,
+  commentstyle=\color{gray},
+  stringstyle=\color{orange},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  numbersep=10pt,
+  columns=fullflexible,
+  tabsize=3,
+  frame=single,
+  frameround=tttt}
+\let\Tiny=\tiny % eliminates compilation errors
+\usepackage{fontspec}
+
+\title{Laboratório de Matemática Computacional I}
+\subtitle{Aula 7}
+\author[M. Weber Mendonça]{Melissa Weber Mendonça\\
+Universidade Federal de Santa Catarina}
+\date{2011}
+
+\begin{document}
+\setmonofont{Inconsolata}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Aquecimento}
+	Escrever uma função que receba dois textos e concatene os dois.
+	
+	\only<2>{\lstinputlisting[title=\texttt{concatenar.m}]{listings/concatenar.m}}
+\end{frame}
+
+\begin{frame}{Funções para texto}
+  \begin{itemize} 
+  \item {\texttt{[]}} ou {\texttt{strcat(texto1,texto2,...)}}: Concatena
+    mais de um texto.
+  \item {\texttt{length(texto)}}: Calcula o comprimento de um texto. 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Exemplos}
+	Escrever uma função que, dado um texto, adiciona um ponto final neste texto.
+  
+ 	\only<2>{\lstinputlisting[title=\texttt{ponto.m}]{listings/ponto.m}}
+\end{frame}
+
+\begin{frame}{Exemplos} 
+  Escrever um programa que, dado um número inteiro $n$, imprime $n$ pontos na tela.
+  
+  Exemplo:
+
+  \qquad Entrada: 5
+
+  \qquad Saída: {\texttt{>> .....}}
+  
+  \only<2>{\lstinputlisting[title=\texttt{pontinhos.m}]{listings/pontinhos.m}}
+\end{frame}
+
+\begin{frame}{Exemplos}
+  Dados dois números $a$ e $b$ entre 1 e 20, desenhar na tela o retângulo de área $ab$.
+  
+	\only<2>{\lstinputlisting[title=\texttt{retangulo.m}]{listings/retangulo.m}}
+\end{frame}
+
+\begin{frame}{Indices}
+   Um texto funciona por índices: 
+   \begin{itemize}
+   \item \texttt{texto = 'Melissa'}
+   \item \texttt{texto(1) = 'M'}
+   \item \texttt{texto(2) = 'e'}
+   \item \texttt{texto(1:2) = 'Me'}
+   \end{itemize}
+\end{frame}
+
+\begin{frame}{Exemplos}
+  Dado um texto, eliminar o primeiro e o último caracteres deste texto.
+  
+  \only<2>{\lstinputlisting[title=\texttt{primeiroeultimo.m}]{listings/primeiroeultimo.m}}
+\end{frame}
+
+\begin{frame}{Exemplo}
+  Escreva um programa que leia uma frase e imprima esta frase na vertical (em pé).
+
+	Exemplo:
+
+  \textbf{Entrada:} 'Frase'. \textbf{Saída:} \begin{tabular}{c} F\\r\\a\\s\\e\end{tabular}
+
+	\only<2>{\lstinputlisting[title=\texttt{vertical.m}]{listings/vertical.m}}
+\end{frame}
+
+\begin{frame}{Exemplos}
+  Dada uma frase, composta por várias palavras separadas por espaços, contar o número de espaços entre as palavras.
+	\begin{center} \href{listings/espacos.m}{\underline{\texttt{espacos.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Exemplos}
+	Escrever uma função que recebe como entradas um texto e um caracter (letra), e conta quantas ocorrências desta letra existem no texto.
+
+	\only<2>{\lstinputlisting[title=\texttt{quantas.m}]{listings/quantas.m}}
+\end{frame}
+
+\end{document}
