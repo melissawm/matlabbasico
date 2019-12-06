@@ -1,0 +1,165 @@
+\documentclass[hyperref={pdfpagelabels=false}]{beamer}
+\usetheme[block=fill]{metropolis}
+
+\usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc} % To use characters such as é without typing é
+\usepackage{ctable}
+\usepackage{listings}
+\lstset{%
+  language=Matlab,
+  showstringspaces=false,
+  basicstyle=\linespread{0.9}\ttfamily,
+  keywordstyle=\textbf,
+  commentstyle=\color{gray},
+  stringstyle=\color{orange},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  numbersep=10pt,
+  columns=fullflexible,
+  tabsize=3,
+  frame=single,
+  frameround=tttt}
+\let\Tiny=\tiny % eliminates compilation errors
+\usepackage{fontspec}
+
+\title{Laboratório de Matemática Computacional I}
+\subtitle{Aula 12}
+\author[M. Weber Mendonça]{Melissa Weber Mendonça\\
+Universidade Federal de Santa Catarina}
+\date{2011}
+
+\begin{document}
+\setmonofont{Inconsolata}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Relembrando...}
+	Na aula passada, vimos que podemos tratar as listas de números em MATLAB como vetores:
+	\begin{center}
+	  $v_1 = [1,2,3,4], v_2 = [0,1,2,3]$\\
+	  $v_1+v_2 = [1+0,2+1,3+2,4+3]$
+	\end{center}
+	Em outras palavras, não precisamos escrever as operações elemento a elemento!
+\end{frame}
+
+\begin{frame}{Mas...}
+  E se quisermos realizar operações elemento a elemento?
+  
+  Exemplo: Escreva um programa que toma dois vetores $u$ e $v$ do mesmo tamanho e retorna um terceiro vetor, contendo em cada entrada $i$ o produto $u(i)*v(i)$.
+  \vfill Em MATLAB, \\ \begin{center}{\texttt{u.*v}}\end{center}
+\end{frame}
+
+\begin{frame}{Exercício}
+  Escrever um programa que, dado um vetor, calcula seu quadrado (elemento a elemento).
+  \vfill Em MATLAB, \\ \begin{center}{\texttt{u.\^{}2}}\end{center}
+\end{frame}
+
+\begin{frame}{Vetores especiais}
+  \begin{itemize}
+  \item[] {\texttt{zeros(n,1)}}
+  \item[] {\texttt{ones(n,1)}}
+  \end{itemize}
+  \vfill
+  \begin{tabular}{r l}
+    Exemplo: &{\texttt{u = 5*ones(3,1)}}\\
+    &{\texttt{v = zeros(size(u,1),1)}}\\
+    &{\texttt{v - u}}
+  \end{tabular}
+\end{frame}
+
+\begin{frame}{Exercício}
+  Escreva um programa que cria um vetor com 100 elementos, de forma que os elementos deste vetor são os elementos da sequência de Fibonacci.  
+	\begin{center} \href{listings/fibo.m}{\underline{\texttt{fibo.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Exercício}
+  Escreva um programa que, dadas duas listas, uma com numeros de matricula e outra com idades, encontre a idade de um aluno.
+	\vfill
+	\begin{tabular}{r r c l}
+	  Exemplo: & matriculas &=& [1101, 1002, 1001, 1104, 1103]\\
+	  & idades &=& [23, 10, 18, 34, 21]
+	\end{tabular}
+	\vfill
+	Entrada: 1102\\
+	Saída: 'A idade do aluno 1102 eh 10 anos.'
+	\begin{center} \href{listings/encontraaluno.m}{\underline{\texttt{encontraaluno.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Matrizes}
+  Poderíamos ter escrito:
+  \vfill
+  \begin{minipage}{5cm}
+    \begin{tabular}{c c}
+			Matrícula & Idade\\\toprule
+      1101 & 23\\\midrule
+      1002 & 10\\\midrule
+      1001 & 18\\\midrule
+      1104 & 34\\\midrule
+      1103 & 21
+    \end{tabular}
+	\end{minipage}
+	\begin{minipage}{5cm}
+    \only<2->{\begin{tabular}{r c l}
+	      dados &=& [1101 23;\\
+	        & &  1002 10;\\
+	        & &  1001 18;\\
+	        & &  1104 34;\\
+	        & &  1103 21]
+	  \end{tabular}}
+	\end{minipage}
+	\only<3>{
+	  \begin{alertblock}{}
+		\begin{center} No MATLAB, todos os objetos são matrizes!! \end{center}
+	\end{alertblock}}
+\end{frame}
+
+\begin{frame}{Exemplo}
+	No console, criar uma matriz que contém uma lista de matrículas de alunos e suas notas na primeira e segunda provas.
+\end{frame}
+
+\begin{frame}{Exemplo}
+  Dada a matriz do exercício anterior, criar um programa que lê uma matrícula de aluno e informa ao usuário suas notas nas duas provas.
+
+	\begin{center} \href{listings/notas.m}{\underline{\texttt{notas.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Exemplo}
+  Ainda usando a mesma matriz, modificar seu programa para que, dada a matrícula de um aluno, ele informe ao usuário a nota da prova $j$ (também dada pelo usuário), ou a média do aluno, caso $j=0$.
+
+	\begin{center} \href{listings/notasemedias.m}{\underline{\texttt{notasemedias.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Exemplo}
+  Modifique o programa anterior para que a média seja guardada em uma nova coluna da matriz.
+
+	\begin{center} \href{listings/notasemedias2.m}{\underline{\texttt{notasemedias2.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Usando \emph{slicing}!}
+   
+  Para vetores: \\
+  \begin{center}
+		{\texttt{v = [3,4,2,1,5];}}\\
+		{\texttt{v(1:3) = [3,4,2]}}
+  \end{center}
+  
+	Também podemos fazer \emph{slicing} em uma matriz, mas aqui devemos ter
+  cuidado com os índices!
+  \vfill
+	Exemplo: $A = \left[ \begin{array}{c c c} 1 & 2 & 3\\ 4 & 5 & 6\end{array}
+      \right]$\\
+	\begin{center}
+	  {\texttt{A(1,:)}}\\
+	  {\texttt{A(:,2)}}\\
+		{\texttt{A(1:2,1:2)}}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Exemplo}
+  Escrever um programa que acrescenta à sua matriz anterior novas matrículas e notas de alunos, e que ao final calcula a média para todos os alunos.
+\end{frame}
+
+\end{document}
