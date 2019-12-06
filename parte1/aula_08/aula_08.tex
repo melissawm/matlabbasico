@@ -1,0 +1,67 @@
+\documentclass[hyperref={pdfpagelabels=false}]{beamer}
+\usetheme[block=fill]{metropolis}
+
+\usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc} % To use characters such as é without typing é
+\usepackage{ctable}
+\usepackage{listings}
+\lstset{%
+  language=Matlab,
+  showstringspaces=false,
+  basicstyle=\linespread{0.9}\ttfamily,
+  keywordstyle=\textbf,
+  commentstyle=\color{gray},
+  stringstyle=\color{orange},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  numbersep=10pt,
+  columns=fullflexible,
+  tabsize=3,
+  frame=single,
+  frameround=tttt}
+\let\Tiny=\tiny % eliminates compilation errors
+\usepackage{fontspec}
+
+\title{Laboratório de Matemática Computacional I}
+\subtitle{Aula 8}
+\author[M. Weber Mendonça]{Melissa Weber Mendonça\\
+Universidade Federal de Santa Catarina}
+\date{2011}
+
+\begin{document}
+\setmonofont{Inconsolata}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Exemplos}
+   Dado um texto, contar o número de vogais do texto.
+   
+   \begin{center} \href{listings/vogais.m}{\underline{\texttt{vogais.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Exercícios}
+  Dada uma frase com as palavras separadas por espaços, retornar um outro texto apenas com as palavras, sem os espaços.
+
+  \begin{center} \href{listings/eliminarespacos.m}{\underline{\texttt{eliminarespacos.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Exemplos}
+  \only<1>{Escrever um programa que, dado um texto (contendo uma palavra ou frase), devolve o mesmo texto, sem espaços no início ou no fim (se existirem). Note que os espaços no meio das palavras não deverão ser removidos. Por exemplo, se o argumento recebido for 
+    \begin{center}"\ \ \ \ \ Bom dia mundo! \ \ \ "\end{center} o programa deverá
+    devolver \begin{center}"Bom dia mundo!"\end{center}}
+	\only<2>{\lstinputlisting[title=\texttt{bomdia.m}]{listings/bomdia.m}}
+\end{frame}
+
+\begin{frame}{Exemplo}
+	\only<1>{Escreva um programa que receba o nome completo de uma pessoa e encontre suas iniciais.
+    \vfill
+    \begin{tabular}{l l l}
+      Exemplo: & Entrada: &Joao Maria Jose Silva \\
+      & Saída: &J. M. J. S. 
+  \end{tabular}}
+  \only<2>{\lstinputlisting[title=\texttt{nome.m}]{listings/nome.m}}
+\end{frame}
+\end{document}
