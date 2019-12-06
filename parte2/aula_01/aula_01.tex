@@ -1,0 +1,190 @@
+\documentclass[hyperref={pdfpagelabels=false}]{beamer}
+\usetheme[block=fill]{metropolis}
+
+\usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc} % To use characters such as é without typing é
+\usepackage{ctable}
+\usepackage{listings}
+\lstset{%
+  language=Matlab,
+  showstringspaces=false,
+  basicstyle=\linespread{0.9}\ttfamily,
+  keywordstyle=\textbf,
+  commentstyle=\color{gray},
+  stringstyle=\color{orange},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  numbersep=10pt,
+  columns=fullflexible,
+  tabsize=3,
+  frame=single,
+  frameround=tttt
+}
+\let\Tiny=\tiny % eliminates compilation errors
+\usepackage{fontspec}
+
+\title{Laboratório de Matemática Computacional II}
+\subtitle{Aula 1}
+\author[M. Weber Mendonça]{Melissa Weber Mendonça\\
+Universidade Federal de Santa Catarina}
+\date{2011}
+
+\begin{document}
+\setmonofont{Inconsolata}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{No semestre passado...}
+  \begin{itemize}
+  \item Estruturas básicas de programação 
+    \begin{itemize}
+		\item \emph{if}
+		\item \emph{for}
+		\item \emph{while}
+		\item \emph{e}/\emph{ou}
+		\end{itemize}
+	\item Estruturas de dados
+		\begin{itemize}
+		\item Números reais
+		\item Vetores (listas)
+		\item Matrizes
+		\item Texto (strings)
+		\end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Objetivos neste semestre}
+  \begin{itemize}
+  \item Mais MATLAB: 
+    \begin{itemize}
+		\item Matrizes, matrizes, matrizes...
+		\item Sistemas lineares
+		\item Métodos de álgebra linear
+		\item Leitura/escrita em arquivos
+		\item Gráficos
+		\end{itemize}
+  \item Introdução ao \LaTeX 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{O que é o \LaTeX?}
+  Ferramenta de criação de documentos que permite a formatação correta de fórmulas matemáticas (e desta apresentação).
+
+  Exemplo: \href{listings/testelatex.tex}{\underline{\texttt{testelatex.tex}}} resulta em \href{listings/testelatex.pdf}{\underline{\texttt{testelatex.pdf}}}
+\end{frame}
+
+\begin{frame}
+  \begin{center} MATLAB \end{center}
+\end{frame}
+
+\begin{frame}{Aquecimento I}
+  Escreva um programa que recebe dois números inteiros $m$ e $n$, e cria uma matriz com $m$ linhas e $n$ colunas de forma que cada elemento da matriz é igual à soma do seu índice de linha e do seu índice de coluna.
+	\vfill
+	Exemplo: $a_{12} = 1+2=3$.
+  \vfill
+  \begin{center} \href{listings/matrizsoma.m}{\underline{\texttt{matrizsoma.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Aquecimento II}
+   Uma matriz é triangular superior quando todos os elementos abaixo da sua diagonal principal forem nulos.
+	 \vfill
+	 Exemplo: \begin{math}
+		 \begin{pmatrix}
+	     1 & 2 & 1 & 0\\
+	     0 & 3 & -1 & 2\\
+	     0 & 0 & 2 & 5\\
+	     0 & 0 & 0 & 1
+	   \end{pmatrix}
+	 \end{math}
+	 é triangular superior.
+	 \vfill
+	 Escreva um programa que recebe uma matriz qualquer e a transforma em
+   triangular superior.
+   \vfill
+   \begin{center} \href{listings/triansup.m}{\underline{\texttt{triansup.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Exercício}
+  Escreva um programa que identifica se uma matriz é simétrica.
+  \vfill
+  \begin{center} \href{listings/ehsimetrica.m}{\underline{\texttt{ehsimetrica.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Exercício}
+	Uma matriz $A$ de ordem $m\times n$ de números reais pode ser:
+	\begin{itemize}
+	\item Quadrada, se $m=n$
+	  \begin{itemize}
+		\item Inversível, $|det(A)|\geq 1e-10$
+			\begin{itemize}
+			\item Diagonal, se todos os elementos fora da diagonal principal
+        forem nulos;
+			\item Regular, se não for Diagonal.
+			\end{itemize}
+		\item Singular, se $|det(A)| < 1e-10$
+			\begin{itemize}
+			\item Esparsa, se mais da metade das entradas forem nulas;
+			\item Densa, se menos da metade das entradas forem nulas.
+			\end{itemize}
+	  \end{itemize}
+	\item Retangular, se $m\ne n$
+		\begin{itemize}
+		\item "Horizontal", se tiver mais colunas do que linhas
+		\item "Vertical", se tiver mais linhas do que colunas.
+		\end{itemize}
+	\end{itemize}
+  Escreva um programa que toma uma matriz qualquer e classifica esta matriz de acordo com as regras acima.
+  \vfill
+  \begin{center} \href{listings/classificarmatriz.m}{\underline{\texttt{classificamatriz.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Slicing}
+  Relembrando: para vetores, 
+  \begin{itemize}
+	\item {\texttt{v(i)}}
+  \item {\texttt{v(:)}}
+  \item {\texttt{v(2:4)}}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Slicing, para matrizes}
+	Aqui, temos dois índices: o de linhas e o de colunas. Portanto, podemos fazer o slicing nos dois índices. (2 dimensões)
+	\begin{itemize}
+	\item {\texttt{A(i,j)}}
+	\item {\texttt{A(i,:)}}
+	\item {\texttt{A(:,j)}}
+	\item {\texttt{A(:,:)}}
+	\item {\texttt{A(:)}} \alert{cuidado!}
+	\item {\texttt{A(1:2,:)}}
+	\item {\texttt{A(1,2:3)}}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Exercício}
+  Escreva um programa que, usando slicing, substitua uma coluna da matriz por zeros.
+  \vfill
+  \begin{center} \href{listings/zerarcoluna.m}{\underline{\texttt{zerarcoluna.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Exercício}
+  Escreva um programa que, usando slicing, substitua uma linha da matriz por zeros.
+  \vfill
+  \begin{center} \href{listings/zerarlinha.m}{\underline{\texttt{zerarlinha.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Exercício}
+	Escreva um programa que, usando slicing, receba uma matriz $A$ de ordem $m\times n$ e dois números $a$ e $b$ e retorne uma outra matriz formada pelas linha 1 até $a$ e pelas colunas 1 até $b$ de $A$.
+  \vfill
+  \begin{center} \href{listings/cortarmatriz.m}{\underline{\texttt{cortarmatriz.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Exercício}
+	Escreva um programa que, usando slicing, calcule a transposta de uma matriz.
+  \vfill
+  \begin{center} \href{listings/transpormatriz.m}{\underline{\texttt{transpormatriz.m}}} \end{center}
+\end{frame}
+
+\end{document}
