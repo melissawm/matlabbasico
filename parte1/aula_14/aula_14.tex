@@ -1,0 +1,100 @@
+\documentclass[hyperref={pdfpagelabels=false}]{beamer}
+\usetheme[block=fill]{metropolis}
+
+\usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc} % To use characters such as é without typing é
+\usepackage{ctable}
+\usepackage{listings}
+\lstset{%
+  language=Matlab,
+  showstringspaces=false,
+  basicstyle=\linespread{0.9}\ttfamily,
+  keywordstyle=\textbf,
+  commentstyle=\color{gray},
+  stringstyle=\color{orange},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  numbersep=10pt,
+  columns=fullflexible,
+  tabsize=3,
+  frame=single,
+  frameround=tttt}
+\let\Tiny=\tiny % eliminates compilation errors
+\usepackage{fontspec}
+
+\title{Laboratório de Matemática Computacional I}
+\subtitle{Aula 14}
+\author[M. Weber Mendonça]{Melissa Weber Mendonça\\
+Universidade Federal de Santa Catarina}
+\date{2011}
+
+\begin{document}
+\setmonofont{Inconsolata}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Aquecimento}
+  Escreva um programa que, dada uma matriz e um número, mostre todos os elementos da matriz que forem maiores do que este número e suas localizações.
+	\vfill
+	\begin{center} \href{listings/elementosmaiores.m}{\underline{\texttt{elementosmaiores.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Exercício}
+  Escreva um programa que tome uma matriz quadrada $A$ e retorne sua diagonal principal como um vetor.
+	\vfill
+	\begin{center} \href{listings/diagonal.m}{\underline{\texttt{diagonal.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Exercício}
+  Escreva um programa que construa a matriz zig-zag de dimensão $m$ por $n$ quaisquer.
+   
+  Exemplo:
+  $$\begin{bmatrix}
+    1 & 2 & 3 & 4 & 5 & 6 & 7\\
+    14 & 13 & 12 & 11 & 10 & 9 & 8\\
+    15 & 16 & 17 & 18 & 19 & 20 & 21\\
+    28 & 27 & 26 & 25 & 24 & 23 & 22
+    \end{bmatrix}_{4\times 7}$$
+  \vfill
+  \begin{center} \href{listings/zigzag.m}{\underline{\texttt{zigzag.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Exercício}
+  Dizemos que uma matriz é \emph{diagonalmente dominante} se cada elemento da sua diagonal principal for, em valor absoluto, maior que a soma de todos os valores absolutos dos outros elementos da mesma linha, ou seja, $A$ é diagonalmente dominante se
+  \begin{equation*}
+    |a_{ii}| \geq \sum_{j\ne i} |a_{ij}| \mbox{ para todo } i.
+  \end{equation*}
+	Escreva um programa que identifica se uma matriz é diagonalmente dominante ou não.
+  \vfill
+  \begin{center} \href{listings/diagonaldominante.m}{\underline{\texttt{diagonaldominante.m}}} \end{center}
+\end{frame}
+
+\begin{frame}{Exercício}
+  Dizemos que uma matriz inteira $A_{n\times n}$ é uma \emph{matriz de permutação} se em cada linha e em cada coluna houver $n-1$ elementos nulos e um único elemento igual a 1. Escreva um programa que verifique se uma matriz é de permutação.
+
+Exemplo:
+\begin{math}
+\left[
+   \begin{array}{c c c c}
+      0&1&0&0\\
+      0&0&1&0\\
+      1&0&0&0\\
+      0&0&0&1
+   \end{array}\right]
+\end{math}
+é de permutação, enquanto
+\begin{math}
+\left[
+   \begin{array}{c c c c}
+      0&1&0&0\\
+      0&0&1&0\\
+      1&0&0&0\\
+      0&0&0&2
+   \end{array}\right]
+\end{math}
+não é.
+\end{frame}
+\end{document}
