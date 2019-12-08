@@ -1,0 +1,319 @@
+\documentclass[hyperref={pdfpagelabels=false}]{beamer}
+\usetheme[block=fill]{metropolis}
+
+\usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc} % To use characters such as é without typing é
+\usepackage{ctable}
+\usepackage{listings}
+\lstset{%
+  language=Matlab,
+  showstringspaces=false,
+  basicstyle=\linespread{0.9}\ttfamily,
+  keywordstyle=\textbf,
+  commentstyle=\color{gray},
+  stringstyle=\color{orange},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  numbersep=10pt,
+  columns=fullflexible,
+  tabsize=3,
+  frame=single,
+  frameround=tttt
+}
+\let\Tiny=\tiny % eliminates compilation errors
+\usepackage{fontspec}
+
+\title{Laboratório de Matemática Computacional II}
+\subtitle{Aula 5}
+\author[M. Weber Mendonça]{Melissa Weber Mendonça\\
+Universidade Federal de Santa Catarina}
+\date{2011}
+
+\begin{document}
+\setmonofont{Inconsolata}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Anteriormente...}
+  Vimos que, no MATLAB, podemos resolver um sistema linear 
+  $$Ax=b$$
+  através do comando
+  \begin{itemize}
+  \item[\texttt{>>}] \texttt{x = A\textbackslash b}
+  \end{itemize}
+  \vfill
+  Exemplo: Resolva o sistema
+  $$
+  \begin{pmatrix}
+    2 & 1 & 3\\  
+    2 & 6 & 8\\
+    6 & 8 & 18\\
+  \end{pmatrix}
+  \begin{pmatrix}
+    x_1\\
+    x_2\\
+    x_3
+  \end{pmatrix}
+  = 
+  \begin{pmatrix}
+    1\\
+    3\\
+    5
+  \end{pmatrix}
+  $$
+  \vfill
+  \begin{itemize}
+  \item[\texttt{>>}] \texttt{A = [2 1 3;2 6 8; 6 8 18]}
+  \item[\texttt{>>}] \texttt{b = [1;3;5]}
+  \item[\texttt{>>}] \texttt{x = A\textbackslash b}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Sistema triangular inferior}
+  \only<1>{%
+    \begin{equation*}
+      \begin{pmatrix}
+        2 & 0 & 0\\  
+        2 & 6 & 0\\
+        6 & 8 & 18\\
+      \end{pmatrix}
+      \begin{pmatrix}
+        x_1\\
+        x_2\\
+        x_3
+      \end{pmatrix}
+      = 
+      \begin{pmatrix}
+        1\\
+        3\\
+        5
+      \end{pmatrix}
+    \end{equation*}
+    \begin{align*}
+      2x_1 = 1 &\Rightarrow x_1 = 1/2\\
+      2x_1+6x_2 = 3 &\Rightarrow x_2 = (3-2x_1)/6\\
+      6x_1+8x_2+18x_3 = 5 &\Rightarrow x_3 = (5-6x_1-8x_2)/18
+    \end{align*}
+  }
+  \only<2>{%
+    Em geral, $$x_i = \frac{(b_i-(a_{i1}x_1+a_{i2}x_2+\ldots + a_{i,i-1}x_{i-1}))}{a_{ii}}$$
+    Para $i=1$ até $n$, faça $$x_i = \frac{\left(b_i -\displaystyle \sum_{j=1}^{i-1} a_{ij}x_j\right)}{a_{ii}}$$
+    \vfill
+    \begin{center}
+      \href{listings/sistematriangularinferior.m}{\underline{\texttt{sistematriangularinferior.m}}}
+    \end{center}
+    }
+\end{frame}
+
+\begin{frame}{Sistema triangular superior}
+  \only<1>{%
+    \begin{equation*}
+      \begin{pmatrix}
+        2 & 1 & 3\\  
+        0 & 6 & 8\\
+        0 & 0 & 18\\
+      \end{pmatrix}
+      \begin{pmatrix}
+        x_1\\
+        x_2\\
+        x_3
+      \end{pmatrix}
+      = 
+      \begin{pmatrix}
+        1\\
+        3\\
+        5
+      \end{pmatrix}
+    \end{equation*}
+    \begin{align*}
+      18x_3 = 5 &\Rightarrow x_3 = 5/18\\
+      6x_2+8x_3 = 3 &\Rightarrow x_2 = (3-8x_3)/6\\
+      2x_1+x_2+3x_3 = 1 &\Rightarrow x_1 = (1-x_2-3x_3)/2
+    \end{align*}
+  }
+  \only<2>{%
+    Em geral, $$x_i = \frac{(b_i-(a_{i,i+1}x_{i+1} +a_{i,i+2}x_{i+2}+\ldots + a_{in}x_n))}{a_{ii}}$$
+    Para $i=n$ até $1$, faça $$x_i = \frac{\left(b_i -\displaystyle \sum_{j=i+1}^n a_{ij}x_j\right)}{a_{ii}}$$
+    \vfill
+    \begin{center}
+      \href{listings/sistematriangularsuperior.m}{\underline{\ttfamily{sistematriangularsuperior.m}}}
+    \end{center}
+    }
+\end{frame}
+
+\begin{frame}{Escalonamento - Eliminação Gaussiana}
+   O processo de escalonamento visa transformar uma matriz qualquer $A\in {\mathbb{R}}^{n\times n}$ em uma matriz triangular superior:
+   $$A = \begin{pmatrix}
+     a_{11} & a_{12} & \cdots & a_{1n}\\
+     a_{21} & a_{22} & \cdots & a_{2n}\\
+     \vdots & & \ddots & \vdots \\
+     a_{n1} & \cdots & 0 & a_{nn}
+   \end{pmatrix}
+   \rightarrow U = 
+   \begin{pmatrix}
+     u_{11} & u_{12} & \cdots & u_{1n}\\
+     0 & u_{22} & \cdots & u_{2n}\\
+     \vdots & & \ddots & \vdots \\
+     0 & \cdots & 0 & u_{nn}
+   \end{pmatrix}.$$
+   Para fazer isso, efetuamos operações nas linhas da matriz $A$.
+
+   Como zerar os elementos abaixo de $a_{ii}$ (pivô)?
+
+   Para $k=i+1$ até $n$, \begin{center}(linha $k$) - $\dfrac{a_{ki}}{a_{ii}}$(linha $i$)\end{center}
+\end{frame}
+
+\begin{frame}{Eliminação Gaussiana}
+   Escreva um programa que transforme uma matriz quadrada
+   $$A \in {\mathbb{R}}^{n\times n}$$
+   em uma matriz triangular superior $U$ usando a eliminação Gaussiana.
+   \vfill
+   \begin{center}
+     \href{listings/eliminacaogaussiana.m}{\underline{\texttt{eliminacaogaussiana.m}}}
+   \end{center}
+\end{frame}
+
+\begin{frame}{Eliminação Gaussiana - Sistemas}
+   Considere o sistema 
+   $$Ax=b, A\in {\mathbb{R}}^{n\times n}, x,b\in {\mathbb{R}}^n.$$
+
+   Escreva um programa que resolva o sistema acima usando eliminação Gaussiana.
+   \begin{itemize}
+      \item[] \texttt{for j = k+1:n}
+      \item[] 
+      \begin{itemize}
+         \item[] \texttt{multiplicador = U(j,k)$/$U(k,k);}
+         \item[] \texttt{U(j,:) = U(j,:) - multiplicador*U(k,:);}
+      \end{itemize}
+      \item[] \texttt{end}
+   \end{itemize}
+   \begin{center}
+     \href{listings/sistemaporeliminacao.m}{\underline{\texttt{sistemaporeliminacao.m}}}
+   \end{center}
+\end{frame}
+
+\begin{frame}{Fatoração $A=LU$}
+   Sabemos que, se uma matriz for inversível, ela pode ser decomposta em 
+   $$A=LU$$
+   onde $L$ é uma matriz triangular inferior (com diagonal 1) e $U$ é uma matriz triagular superior. 
+
+   Como encontrar $L$ e $U$ através da eliminação gaussiana?
+
+   Sabemos que:
+
+   \begin{itemize}
+      \item[] \texttt{for j = k+1:n}
+      \item[] 
+      \begin{itemize}
+         \item[] \texttt{multiplicador = U(j,k)$/$U(k,k);}
+         \item[] \alert{\texttt{L(j,k) = multiplicador;}}
+         \item[] \texttt{U(j,:) = U(j,:) - multiplicador*U(k,:);}
+      \end{itemize}
+      \item[] \texttt{end}
+   \end{itemize}
+   \begin{center}
+     \href{listings/fatoracaolu.m}{\underline{\texttt{fatoracaolu.m}}}
+   \end{center}
+\end{frame}
+
+\begin{frame}{Troca de linhas}
+  \only<1>{Se encontrarmos um pivô nulo durante a eliminação, ainda podemos tentar trocar as linhas de lugar e continuar a eliminação:}
+
+  Exemplo: 
+  $$A = \begin{pmatrix} 1 & 1 & 1 \\ 1 & 1 & 3 \\ 2 & 5 & 8 \end{pmatrix} \rightarrow \begin{pmatrix} 1 & 1 & 1 \\ 0 & 0 & 2 \\ 0 & 3 & 6 \end{pmatrix}\rightarrow \alert{\begin{pmatrix} 1 & 1 & 1 \\ 0 & 3 & 6\\0 & 0 & 2  \end{pmatrix}}$$
+  
+  Uma matriz de permutação é uma $P$, permutação da identidade: neste caso,
+  $$ P = \begin{pmatrix} 1 &0&0\\ 0&0&1\\0&1&0\end{pmatrix}$$
+  \only<2>{Com isso, podemos determinar uma fatoração $PA=LU$, em que $P$ acumula todas as trocas de linhas ($k$) necessárias à eliminação:
+    $$P = P_{k}P_{k-1}\ldots P_2 P_1$$}
+\end{frame}
+
+\begin{frame}{$PA=LU$}
+   \begin{center}
+     \href{listings/palu.m}{\underline{\texttt{palu.m}}}
+   \end{center}
+   Para testar: use os comandos abaixo para gerar um sistema que tem solução $(1,1,\ldots,1) \in {\mathbb{R}}^n$.
+   \begin{itemize}
+      \item[\ttfamily{>>}] \ttfamily{A = rand(m,n);}
+      \item[\ttfamily{>>}] \ttfamily{b = A*ones(n,1);}
+   \end{itemize}
+\end{frame}
+
+\begin{frame}{Estruturas de dados Heterogêneas}
+
+   Muitas vezes, gostaríamos de armazenar dados da seguinte forma:
+   \begin{center}
+     \footnotesize{%
+       \begin{tabular}{l c c}
+         Título & Núm. Páginas & Datas de Empréstimo e Devolução\\\toprule
+         ``Álgebra Linear'' & 205 & 12/08, 15/08\\
+         ``Cálculo'' & 346 & 10/09, 12/09\\
+         ``Geometria'' & 123 & 04/08, 05/09\\
+         ``Topologia'' & 253 & 01/08, 04/09
+       \end{tabular}
+       }
+   \end{center}
+
+   Porém, estes dados são de natureza \emph{heterogênea}: misturamos texto (string), números e intervalos. Como armazenar isso em uma só tabela no MATLAB?
+\end{frame}
+
+\begin{frame}{Estrutura \emph{Cell}}
+   No MATLAB, podemos fazer o seguinte:
+   \begin{itemize}
+      \item[\ttfamily{>>}] \ttfamily{tabela = \{ 'Algebra Linear', 205, [1208, 1508];}
+      \item[\ttfamily{>>}] \ttfamily{\hskip2.2cm 'Calculo', 346, [1009,1209];}
+      \item[\ttfamily{>>}] \ttfamily{\hskip2.2cm 'Geometria', 123, [0408,0509];}
+      \item[\ttfamily{>>}] \ttfamily{\hskip2.2cm 'Topologia', 253, [0108,0409] \} }
+   \end{itemize}
+   A célula funciona como uma matriz, mas aqui os índices são dados sempre entre chaves: \ttfamily{\{\}}.
+\end{frame}
+
+\begin{frame}{Comandos}
+   Para ver o que está armazenado na variável \ttfamily{tabela}, basta usarmos o comando
+   \begin{itemize}
+      \item[\ttfamily{>>}] \ttfamily{celldisp(tabela)}
+   \end{itemize}
+   Para verificar o tamanho de uma célula, usamos o comando
+   \begin{itemize}
+      \item[\ttfamily{>>}] \ttfamily{size(tabela)}
+   \end{itemize}
+   Para criar uma célula vazia com $m$ por $n$ elementos, usamos o comando
+   \begin{itemize}
+      \item[\ttfamily{>>}] \ttfamily{tabela = cell(m,n)}
+   \end{itemize}
+   Para apagar um elemento da célula, podemos usar a notação de matriz vazia:
+   \begin{itemize}
+      \item[\ttfamily{>>}] \ttfamily{tabela\{1,2\} = []}
+   \end{itemize}
+\end{frame}
+
+\begin{frame}{Exercício}
+   Escreva um programa que receba uma lista de nomes e datas de nascimento, e um mês. Seu programa deve dizer quais pessoas fazem aniversário naquele mês.
+
+   Exemplo:\\
+   \begin{center}
+   \begin{tabular}{l l}
+      Nome & Mês\\\toprule
+      'Joao' & 'setembro'\\
+      'Maria' & 'janeiro'\\
+      'Roberta' & 'julho'\\
+      'Danilo' & 'dezembro'
+   \end{tabular}
+   \end{center}
+   \vfill
+   \begin{center}
+     \href{listings/aniversarios.m}{\underline{\ttfamily{aniversarios.m}}}
+   \end{center}
+\end{frame}
+
+\begin{frame}{Exercício}
+   Escreva um programa que receba uma lista de matrizes, e suas duas dimensões ($m$ e $n$). No final, diga quais matrizes podem ser multiplicadas e em que ordem.
+   \vfill
+   \begin{center}
+     \href{listings/podemmultiplicar.m}{\underline{\ttfamily{podemmultiplicar.m}}}
+   \end{center}
+\end{frame}
+\end{document}
