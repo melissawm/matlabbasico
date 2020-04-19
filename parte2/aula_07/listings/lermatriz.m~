@@ -1,0 +1,7 @@
+arquivo = fopen('matriz.txt');
+A = fscanf(arquivo,'%f',[3 3]);
+fclose(arquivo);
+% A verdadeira matriz eh a transposta
+% da matriz que foi lida:
+A = A';
+A

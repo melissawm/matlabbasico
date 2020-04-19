@@ -1,0 +1,369 @@
+\documentclass[hyperref={pdfpagelabels=false}]{beamer}
+\usetheme[block=fill]{metropolis}
+
+\usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc} % To use characters such as é without typing é
+\usepackage{ctable}
+\usepackage{listings}
+\lstset{%
+  language=Matlab,
+  showstringspaces=false,
+  basicstyle=\linespread{0.9}\ttfamily,
+  keywordstyle=\textbf,
+  commentstyle=\color{gray},
+  stringstyle=\color{orange},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  numbersep=10pt,
+  columns=fullflexible,
+  tabsize=3,
+  frame=single,
+  frameround=tttt
+}
+\let\Tiny=\tiny % eliminates compilation errors
+\usepackage{fontspec}
+
+\title{Laboratório de Matemática Computacional II}
+\subtitle{Aula 7}
+\author[M. Weber Mendonça]{Melissa Weber Mendonça\\
+Universidade Federal de Santa Catarina}
+\date{2011}
+
+\begin{document}
+\setmonofont{Inconsolata}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Arquivos}
+  
+  Como fazer para guardar informações e não ter que digitá-las novamente?
+  \vfill
+  
+  Exemplo:
+
+  Seja $A$ uma matriz $100\times 100$. Como resolver o sistema
+  \begin{equation*}
+    Ax=b
+  \end{equation*}
+  10 vezes, para 10 vetores $b$ diferentes?
+  \vfill
+
+  Vamos usar \emph{\alert{arquivos}} para armazenar estas informações, e usar a leitura e escrita em arquivos.
+\end{frame}
+
+\begin{frame}{Abrir e fechar um arquivo}
+  Para abrir um arquivo chamado \texttt{nome.txt}, podemos usar o comando
+  \begin{center}
+    \texttt{arquivo = fopen('nome.txt')}
+  \end{center}
+  \vfill
+  Sempre que abrimos um arquivo, precisamos fechá-lo antes de sair do nosso programa, para garantir a integridade dos dados no arquivo. Para isso, podemos usar o comando
+  \begin{center}
+    \texttt{fclose(arquivo)}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Exemplo}
+  No console, fazemos
+  \vfill
+  \begin{itemize}
+  \item[\texttt{>>}] \texttt{arquivo = fopen('nome.txt')}
+  \item[\texttt{>>}] \texttt{\alert{comandos}}
+  \item[\texttt{>>}] \texttt{fclose(arquivo)}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Comandos: leitura}
+
+  Para ler dados de um arquivo, precisamos indicar que tipo de informação estamos procurando. Isto é feito através dos \emph{formatos} abaixo:
+
+  \begin{itemize}
+  \item Números inteiros: \texttt{\%d}
+  \item Números reais: \texttt{\%f} (notação decimal) ou \texttt{\%e} (notação científica)
+  \item Texto com espaços: \texttt{\%c}
+  \item Texto sem espaços: \texttt{\%s}
+  \item Nova linha: \texttt{$\backslash$n}
+  \end{itemize}
+    
+  Assim, o comando para se ler um número inteiro de um arquivo de texto dados pelo identificador \texttt{arquivo} é
+  \begin{center}
+    \texttt{a = fscanf(arquivo, '\%d')}
+  \end{center}
+\end{frame}
+  
+\begin{frame}{Exemplo}
+  \begin{enumerate}
+  \item Crie um arquivo chamado \alert{\texttt{info.txt}} no mesmo diretório em que está salvando seus programas, com um número inteiro dentro.
+  \item No console, faça:
+    \begin{itemize}
+    \item[\texttt{>>}] \texttt{arquivo = fopen('info.txt')}
+    \item[\texttt{>>}] \texttt{a = fscanf(arquivo, '\%d')}
+    \item[\texttt{>>}] \texttt{fclose(arquivo)}
+    \end{itemize}
+  \end{enumerate}
+
+Verifique que a variável \alert{\texttt{a}} vale o mesmo que seu inteiro no arquivo.
+ 
+\end{frame}
+
+\begin{frame}{Exercício}
+
+  Repita o exercício anterior (ler UM dado de um arquivo), agora com um número real:
+
+  \texttt{>> real = fscanf(arquivo, '\%f')}
+
+  e depois repita com um texto:
+
+  \texttt{>> texto = fscanf(arquivo, '\%s')}
+
+  \vfill
+
+  Tente colocar o formato errado e observe o erro produzido.
+\end{frame}
+
+\begin{frame}{Lista de dados}
+
+  Se quisermos ler uma lista de números inteiros, por exemplo, devemos informar o \emph{padrão} dos dados.
+
+  Exemplo: se no arquivo temos
+  \begin{center}
+    \texttt{1 2 3 4 5}
+  \end{center}
+
+  precisamos usar o comando
+
+  \begin{center}
+    \texttt{v = fscanf(arquivo, '\%d')}
+  \end{center}
+
+  \texttt{v} será um vetor \emph{coluna}.
+  
+\end{frame}
+
+\begin{frame}{Exemplo}
+
+  Ler um vetor de dados de um arquivo chamado \texttt{lista.txt}.
+
+  \begin{center}
+    \begin{minipage}{0.95\textwidth}
+      \lstinputlisting[title=\texttt{lerdados.m}]{listings/lerdados.m}
+    \end{minipage}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Exercício}
+
+  Ler uma matriz $3\times 3$ de dados de um arquivo \texttt{.txt}
+
+  \begin{center}
+    \alert{Cuidado com a ordem dos dados!}
+  \end{center}
+
+  \begin{center}
+    \begin{minipage}{0.95\linewidth}
+      \lstinputlisting[title=\texttt{lermatriz.m}]{listings/lermatriz.m}
+    \end{minipage}
+  \end{center}
+
+  Esse resultado é o que queremos?
+  
+\end{frame}
+
+\begin{frame}{Ler uma matriz}
+
+  Por padrão, o MATLAB lê os dados em um vetor. Se quisermos especificar o tamanho da saída dos dados, devemos acrescentar um argumento à função \texttt{fscanf}:
+  \begin{center}
+    \texttt{A = fscanf(arquivo, '\%f', [3 3])}
+  \end{center}
+
+  \begin{center}
+    \begin{minipage}{0.95\linewidth}
+      \lstinputlisting[title=\texttt{lermatrizcorreto.m}]{listings/lermatrizcorreto.m}
+    \end{minipage}
+  \end{center}
+  
+\end{frame}
+
+\begin{frame}{Ler uma matriz desconhecida}
+
+  Se não sabemos o tamanho da matriz que está no arquivo, não podemos informar seu formato. Mas podemos contar quantos elementos foram lidos do arquivo:
+
+  \begin{center}
+    \texttt{[A, contador] = fscanf(arquivo, '\%d')}
+  \end{center}
+
+  Para ler o conteúdo do arquivo sem interpretar os valores, podemos usar o comando
+  \begin{center}
+    \texttt{type('nome.txt')}
+  \end{center}
+  
+\end{frame}
+
+\begin{frame}{Exercício}
+
+  Ler uma matriz de tamanho desconhecido (mas quadrada) do arquivo \texttt{\alert{matrizquadrada.txt}} e retransformá-la em sua forma original.
+
+  \begin{center}
+    \href{listing/lermatrizquadrada.m}{\underline{\texttt{lermatrizquadrada.m}}}
+  \end{center}
+  
+\end{frame}
+
+\begin{frame}{Formatos avançados}
+
+  Suponha que nosso arquivo também contenha o campo do nome dos dados:
+
+  \begin{center}
+    \begin{tabular}{l r l r}
+      Hora & 1 & Temperatura & 20.6\\
+      Hora & 3 & Temperatura & 21.2\\
+      Hora & 5 & Temperatura & 23.1\\
+      Hora & 6 & Temperatura & 24.5\\
+      Hora & 8 & Temperatura & 25.0\\
+      Hora & 9 & Temperatura & 25.2\\
+      Hora & 10 & Temperatura & 25.8
+    \end{tabular}
+  \end{center}
+
+  Para ler apenas os números desta tabela, podemos usar o comando
+
+  \begin{center}
+    \texttt{A = fscanf(arquivo, 'Hora \%d Temperatura \%f$\backslash$n', [2 7])}
+  \end{center}
+  
+\end{frame}
+
+\begin{frame}{Exemplo}
+  Se não conhecemos quantos dados estão na lista (mas sabemos que são 2 por linha), podemos especificar
+  \begin{center}
+    \texttt{A = fscanf(arquivo, 'Hora \%d Temperatura \%f$\backslash$n', [2 Inf])}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Exercício}
+
+  Dado um arquivo com a tabela abaixo de nomes e idades, calcule a média de idades deste grupo.
+  \begin{center}{\footnotesize{%
+    \begin{tabular}{l r}
+      Antonio & 12\\
+      Bruno & 20\\
+      Caio & 34\\
+      Danilo & 21\\
+      Eder & 45\\
+      Fernando & 78\\
+      Gustavo & 20
+    \end{tabular}}}
+  \end{center}
+
+  Dica: para não ler o texto, e ler apenas as idades, podemos \emph{pular} o campo de texto com o comando
+
+  \begin{center}
+    \texttt{idades = fscanf(arquivo, '\%\alert{*}s \%d$\backslash$n')}
+  \end{center}
+
+  \begin{center}
+    \href{listings/tabela.txt}{\underline{\texttt{tabela.txt}}}\\
+    \href{listings/mediadeidades.m}{\underline{\texttt{mediadeidades.m}}}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Excrita}
+
+  Para escrever em um arquivo existente, a sintaxe é similar, mas devemos avisar ao MATLAB que vamos escrever neste arquivo:
+  \vfill
+
+  \begin{itemize}
+  \item[\texttt{>>}] \texttt{arquivo = fopen('info.txt', \alert{'w'})}
+  \item[\texttt{>>}] \texttt{fprintf(arquivo, '\%d', 1)}
+  \item[\texttt{>>}] \texttt{fclose(arquivo)}
+  \end{itemize}
+
+  Abra o arquivo \texttt{info.txt} e observe o seu conteúdo.
+  
+\end{frame}
+
+\begin{frame}{Opções do comando \texttt{fopen}}
+
+  \begin{itemize}
+  \item[\texttt{>>}] \texttt{arquivo = fopen('info.txt', \alert{'r'})}
+  \item[\texttt{>>}] \texttt{arquivo = fopen('info.txt', \alert{'w'})}
+  \item[\texttt{>>}] \texttt{arquivo = fopen('info.txt', \alert{'a'})}
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}{Exemplo}
+
+  Escreva um vetor em um arquivo.
+
+  \vfill
+  
+  \begin{center}
+    \href{listings/escrevervetor.m}{\underline{\texttt{escrevervetor.m}}}
+  \end{center}
+  
+\end{frame}
+
+\begin{frame}{Exemplo}
+
+  Escreva uma matriz em um arquivo.
+
+  \vfill
+  
+  \begin{center}
+    \href{listings/escrevermatriz.m}{\underline{\texttt{escrevermatriz.m}}}
+  \end{center}
+  
+\end{frame}
+
+\begin{frame}{Exemplo}
+
+  Escreva uma lista de textos armazenada em uma célula em um arquivo.
+
+  \vfill
+  
+  \begin{center}
+    \href{listings/escrevercelula.m}{\underline{\texttt{escrevercelula.m}}}
+  \end{center}
+  
+\end{frame}
+
+\begin{frame}{Exercício}
+
+  Abrir dois arquivos, um com nomes e outro com idades de pessoas, e escrever uma tabela em um terceiro arquivo com os nomes e as idades.
+
+  \vfill
+  
+  \begin{center}
+    \href{listings/listanomes.txt}{\underline{\texttt{listanomes.txt}}}\\
+    \href{listings/listaidades.txt}{\underline{\texttt{listaidades.txt}}}\\
+    \href{listings/juntanomeseidades.m}{\underline{\texttt{juntanomeseidades.m}}}
+  \end{center}
+  
+\end{frame}
+
+\begin{frame}{Exercício}
+  Ler uma matriz com a primeira coluna armazenando as horas e a segunda coluna armazenando as temperaturas medidas em Florianópolis em determinado dia, e escrever um arquivo como o do exercício anterior:
+
+  \begin{center}
+    \begin{tabular}{l r l r}
+      Hora & 1 & Temperatura & 20.6\\
+      Hora & 3 & Temperatura & 21.2\\
+      Hora & 5 & Temperatura & 23.1\\
+      Hora & 6 & Temperatura & 24.5\\
+      Hora & 8 & Temperatura & 25.0\\
+      Hora & 9 & Temperatura & 25.2\\
+      Hora & 10 & Temperatura & 25.8
+    \end{tabular}
+  \end{center}
+
+  \begin{center}
+    \href{listings/construirtabela.m}{\underline{\texttt{construirtabela.m}}}
+  \end{center}
+
+\end{frame}
+
+\end{document}

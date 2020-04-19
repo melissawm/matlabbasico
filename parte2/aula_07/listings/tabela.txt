@@ -1,0 +1,7 @@
+Antonio 12
+Bruno 20
+Caio 34
+Danilo 21
+Eder 45
+Fernando 78
+Gustavo 20
