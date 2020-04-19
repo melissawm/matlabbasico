@@ -1,0 +1,203 @@
+\documentclass[hyperref={pdfpagelabels=false}]{beamer}
+\usetheme[block=fill]{metropolis}
+
+\usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc} % To use characters such as é without typing é
+\usepackage{ctable}
+\usepackage{listings}
+\lstset{%
+  language=Matlab,
+  showstringspaces=false,
+  basicstyle=\linespread{0.9}\ttfamily,
+  keywordstyle=\textbf,
+  commentstyle=\color{gray},
+  stringstyle=\color{orange},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  numbersep=10pt,
+  columns=fullflexible,
+  tabsize=3,
+  frame=single,
+  frameround=tttt
+}
+\let\Tiny=\tiny % eliminates compilation errors
+\usepackage{fontspec}
+
+\title{Laboratório de Matemática Computacional II}
+\subtitle{Aula 6}
+\author[M. Weber Mendonça]{Melissa Weber Mendonça\\
+Universidade Federal de Santa Catarina}
+\date{2011}
+
+\begin{document}
+\setmonofont{Inconsolata}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Anteriormente...}
+  Estrutura \emph{célula}:
+  \begin{center}
+    \texttt{tabela = \{ 'Maria', 17, [12, 14] \}}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Aquecimento}
+
+  Escreva um programa que preencha uma tabela de nomes de funcionários e quantas horas este funcionário trabalhou na semana (entre 8 e 40 horas) e calcule o total da folha de pagamento semanal, sendo que a empresa paga 25 reais por hora trabalhada.
+
+  \begin{center}
+    \href{listings/folha.m}{\underline{\texttt{folha.m}}}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Exercício}
+
+  Escreva um programa que receba uma lista de nomes e sobrenomes, e ordene a lista por ordem alfabética de nomes.
+
+  Atenção: para acessar cada elemento de um vetor (ou de um texto!) armazenado dentro de uma célula, devemos usar a seguinte sintaxe:
+
+  \begin{center}
+    \texttt{>> tabela\{1, 3\}(2)}
+  \end{center}
+
+  (acessa o segundo elemento do vetor armazenado na posição (1,3) da célula.)
+
+  \begin{center}
+    \href{listings/nomes.m}{\underline{\texttt{nomes.m}}}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Exercício}
+  Escreva um programa que construa um banco de dados de alimentos e preços por unidade, e que calcule o preço de uma compra informada pelo usuário.
+
+  Exemplo de entrada:
+  \vfill
+  ``Entre com o alimento: {\texttt{laranja}}''
+  
+  ``Entre com o número de unidades do alimento que deseja comprar: {\texttt{2}}''
+  \vfill
+  \begin{center}
+    \href{listings/compra.m}{\underline{\texttt{compra.m}}}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Outras possibilidades}
+
+  Podemos construir células contendo outras células:
+
+  \begin{tabular}{r l}
+    \texttt{>> v = \{} & \texttt{\alert{\{} 1, 'teste', [1:2] \alert{\}};}\\
+    & \texttt{\alert{\{} [0,3], 12, 'nome', rand(4,4) \alert{\}} \}}
+  \end{tabular}
+
+  Nesse caso, os elementos devem ser referenciados da seguinte forma:
+
+  \texttt{>> v\{2\}\{1\}}
+\end{frame}
+
+\begin{frame}{Exercício}
+
+  Modifique o programa anterior (dos nomes e sobrenomes) para que ele ordene a lista por ordem alfabética de nomes ou sobrenomes, conforme selecionado pelo usuário.
+
+  \vfill
+
+  Sugestão: no campo ``nome'', fazer uma célula com dois elementos: o nome, e o sobrenome.
+
+  \vfill
+
+  \begin{center}
+    \href{listings/nomesousobrenomes.m}{\underline{\texttt{nomesousobrenomes.m}}}
+  \end{center}
+  
+\end{frame}
+
+\begin{frame}{Mais comandos}
+
+  Podemos, analogamente ao que fizemos com vetores, concatenar células:
+
+  \begin{itemize}
+  \item[\texttt{>>}] \texttt{C1 = \{ 'Joao', 16 \}}
+  \item[\texttt{>>}] \texttt{C2 = \{ 'Maria', 18; 'Ricardo', 13 \}}
+  \item[\texttt{>>}] \texttt{cola = \{ C1 C2 \}} \qquad \alert{CUIDADO!}
+  \item[\texttt{>>}] \texttt{uniao = [ C1\alert{;} C2 ]}
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}{Exercício}
+  
+  Usando a tabela do exercício anterior, acrescente uma ``coluna'' à célula que informa a data de nascimento de cada pessoa.
+
+  \vfill
+
+  \begin{center}
+    \href{listings/coluna.m}{\underline{\texttt{coluna.m}}}
+  \end{center}
+
+\end{frame}
+
+\begin{frame}{Exercícios}
+  
+  Escreva um programa que calcule o preço de um computador como soma do custo de cada componente.
+
+  \footnotesize{%
+  \begin{itemize}
+  \item Placa-mãe: R\$800,00 (obrigatória em todos os computadores)
+  \item Opções de memória: 2, 4 ou 8 Gb, cada 2Gb custa R\$150,00.
+  \item Opções de processadores:
+    \begin{itemize}
+    \item Dual core: R\$530,00
+    \item Quad core: R\$710,00
+    \end{itemize}
+  \item Oções de disco rígido:
+    \begin{itemize}
+    \item 250Gb: R\$200,00
+    \item 500Gb: R\$320,00
+    \item 1Tb: R\$400,00
+    \end{itemize}
+  \item Opções de monitor:
+    \begin{itemize}
+    \item 19 polegadas: R\$320,00
+    \item 21 polegadas: R\$520,00
+    \end{itemize}
+  \end{itemize}
+}
+
+\begin{center}
+  \href{listings/computadores.m}{\underline{\texttt{computadores.m}}}
+\end{center}
+  
+\end{frame}
+
+\begin{frame}{Outras possiblidades...}
+
+  Vetor de células:
+  
+  \begin{tabular}{rl}
+    \texttt{>> v = [} & \texttt{\alert{\{} 1, 'teste', [1:2] \alert{\}};}\\
+                      & \texttt{\alert{\{} [0,3], 12, 'nome' \alert{\}} ]}
+  \end{tabular}
+  \vfill
+
+  Cuidado: aqui, as células devem ter a mesma dimensão para ficarem em um vetor: se cada célula é 3$\times $ 2, e temos 10 células, o tamanho do vetor de células será 30$\times$2.
+
+  Neste caso, os elementos devem ser referenciados da seguinte forma:
+
+  \texttt{>> v(2)\{1\}}
+\end{frame}
+
+\begin{frame}{Revisão}
+  \begin{itemize}
+  \item \texttt{if} \textemdash\ \texttt{for} \textemdash\ \texttt{while} (Estruturas de repetição e condicionais)
+  \item Textos
+  \item Vetores
+  \item Matrizes
+  \item Gráficos
+  \item Células
+  \end{itemize}
+\end{frame}
+
+\end{document}

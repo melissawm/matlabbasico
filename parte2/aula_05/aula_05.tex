@@ -139,7 +139,7 @@ Universidade Federal de Santa Catarina}
     Para $i=n$ até $1$, faça $$x_i = \frac{\left(b_i -\displaystyle \sum_{j=i+1}^n a_{ij}x_j\right)}{a_{ii}}$$
     \vfill
     \begin{center}
-      \href{listings/sistematriangularsuperior.m}{\underline{\ttfamily{sistematriangularsuperior.m}}}
+      \href{listings/sistematriangularsuperior.m}{\underline{\texttt{sistematriangularsuperior.m}}}
     \end{center}
     }
 \end{frame}
@@ -237,8 +237,8 @@ Universidade Federal de Santa Catarina}
    \end{center}
    Para testar: use os comandos abaixo para gerar um sistema que tem solução $(1,1,\ldots,1) \in {\mathbb{R}}^n$.
    \begin{itemize}
-      \item[\ttfamily{>>}] \ttfamily{A = rand(m,n);}
-      \item[\ttfamily{>>}] \ttfamily{b = A*ones(n,1);}
+      \item[\texttt{>>}] \texttt{A = rand(m,n);}
+      \item[\texttt{>>}] \texttt{b = A*ones(n,1);}
    \end{itemize}
 \end{frame}
 
@@ -263,30 +263,30 @@ Universidade Federal de Santa Catarina}
 \begin{frame}{Estrutura \emph{Cell}}
    No MATLAB, podemos fazer o seguinte:
    \begin{itemize}
-      \item[\ttfamily{>>}] \ttfamily{tabela = \{ 'Algebra Linear', 205, [1208, 1508];}
-      \item[\ttfamily{>>}] \ttfamily{\hskip2.2cm 'Calculo', 346, [1009,1209];}
-      \item[\ttfamily{>>}] \ttfamily{\hskip2.2cm 'Geometria', 123, [0408,0509];}
-      \item[\ttfamily{>>}] \ttfamily{\hskip2.2cm 'Topologia', 253, [0108,0409] \} }
+      \item[\texttt{>>}] \texttt{tabela = \{ 'Algebra Linear', 205, [1208, 1508];}
+      \item[\texttt{>>}] \texttt{\hskip2.2cm 'Calculo', 346, [1009,1209];}
+      \item[\texttt{>>}] \texttt{\hskip2.2cm 'Geometria', 123, [0408,0509];}
+      \item[\texttt{>>}] \texttt{\hskip2.2cm 'Topologia', 253, [0108,0409] \} }
    \end{itemize}
-   A célula funciona como uma matriz, mas aqui os índices são dados sempre entre chaves: \ttfamily{\{\}}.
+   A célula funciona como uma matriz, mas aqui os índices são dados sempre entre chaves: \texttt{\{\}}.
 \end{frame}
 
 \begin{frame}{Comandos}
-   Para ver o que está armazenado na variável \ttfamily{tabela}, basta usarmos o comando
+   Para ver o que está armazenado na variável \texttt{tabela}, basta usarmos o comando
    \begin{itemize}
-      \item[\ttfamily{>>}] \ttfamily{celldisp(tabela)}
+      \item[\texttt{>>}] \texttt{celldisp(tabela)}
    \end{itemize}
    Para verificar o tamanho de uma célula, usamos o comando
    \begin{itemize}
-      \item[\ttfamily{>>}] \ttfamily{size(tabela)}
+      \item[\texttt{>>}] \texttt{size(tabela)}
    \end{itemize}
    Para criar uma célula vazia com $m$ por $n$ elementos, usamos o comando
    \begin{itemize}
-      \item[\ttfamily{>>}] \ttfamily{tabela = cell(m,n)}
+      \item[\texttt{>>}] \texttt{tabela = cell(m,n)}
    \end{itemize}
    Para apagar um elemento da célula, podemos usar a notação de matriz vazia:
    \begin{itemize}
-      \item[\ttfamily{>>}] \ttfamily{tabela\{1,2\} = []}
+      \item[\texttt{>>}] \texttt{tabela\{1,2\} = []}
    \end{itemize}
 \end{frame}
 
@@ -305,7 +305,7 @@ Universidade Federal de Santa Catarina}
    \end{center}
    \vfill
    \begin{center}
-     \href{listings/aniversarios.m}{\underline{\ttfamily{aniversarios.m}}}
+     \href{listings/aniversarios.m}{\underline{\texttt{aniversarios.m}}}
    \end{center}
 \end{frame}
 
@@ -313,7 +313,7 @@ Universidade Federal de Santa Catarina}
    Escreva um programa que receba uma lista de matrizes, e suas duas dimensões ($m$ e $n$). No final, diga quais matrizes podem ser multiplicadas e em que ordem.
    \vfill
    \begin{center}
-     \href{listings/podemmultiplicar.m}{\underline{\ttfamily{podemmultiplicar.m}}}
+     \href{listings/podemmultiplicar.m}{\underline{\texttt{podemmultiplicar.m}}}
    \end{center}
 \end{frame}
 \end{document}
